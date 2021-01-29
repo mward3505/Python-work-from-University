@@ -6,44 +6,57 @@ import time
 def linear_search(lyst, target):
     for i in range(len(lyst)):
         if lyst[i] == target:
-            return i
-    return -1
+            return True
+    return False
 
 
 def binary_search(lyst, target):
-    if len(lyst) == 0:
-        return False
+    lyst.sort()
+    low = 0
+    high = len(lyst)-1
 
-    midpoint = len(lyst) // 2
+    while low <= high:
 
-    if lyst[midpoint] == target:
-        return True
-    else:
+        midpoint = high + low // 2
+        r = lyst[midpoint]
         if lyst[midpoint] < target:
-            return binary_search(lyst[:midpoint], target)
+            low = midpoint + 1
         elif lyst[midpoint] > target:
-            return binary_search(lyst[midpoint + 1:], target)
+            high = midpoint - 1
+        else:
+            return True
+
+    return False
+
+    # if lyst[midpoint] == target:
+    #     return True
+    # else:
+    #     if lyst[midpoint] > target:
+    #         return binary_search(lyst[:midpoint], target)
+    #     elif lyst[midpoint] < target:
+    #         return binary_search(lyst[midpoint + 1:], target)
 
 
 def jump_search(lyst, target):
-    n = len(lyst)
-    step = math.sqrt(n)
+    lyst.sort()
+    length = len(lyst)
+    step = math.sqrt(length)
 
     prev = 0
-    while lyst[int(min(step, n) - 1)] < target:
+    while lyst[int(min(step, length) - 1)] < target:
         prev = step
-        step += math.sqrt(n)
-        if prev >= n:
-            pass
+        step += math.sqrt(length)
+        if prev >= length:
+            return False
 
     while lyst[int(prev)] < target:
         prev += 1
 
-        if prev == min(step, n):
-            pass
+        if prev == min(step, length):
+            return False
 
     if lyst[int(prev)] == target:
-        return prev
+        return True
 
 
 def main():
@@ -125,4 +138,5 @@ def main():
     print("End Search = %s, took %0.8f" % (result, time_end - time_start))
 
 
-main()
+if __name__ == "__main__":
+    main()
