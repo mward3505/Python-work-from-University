@@ -5,15 +5,18 @@ import pytest
 import math
 from course import Course
 from courselist import CourseList
+from main import main as mn
+
 
 def test_course_creation():
     # make sure that an empty course is correct
     c = Course()
     assert c.name() == ""
-    assert c.number() == 0 
+    c.number() == 0 
     assert c.credit_hr() == 0.0
     assert c.grade() == 0.0
     assert c.next == None
+
 
 def test_course_creation_with_parameters():
     c = Course(1234, "Test Name", 3.0, 3.72)
@@ -47,6 +50,7 @@ def test_empty_courselist():
     assert cl.calculate_gpa() == 0.0
     assert cl.is_sorted()
 
+
 def test_insert():
     random.seed(0)
     cl = CourseList()
@@ -55,6 +59,7 @@ def test_insert():
 
     assert cl.size() == 37
     assert cl.is_sorted()
+
 
 def test_remove():
     random.seed(0)
@@ -78,12 +83,13 @@ def test_remove():
     assert cl.size() == 27
     assert cl.is_sorted()
 
+
 def test_remove_all():
     cl = CourseList()
-    cl.insert(Course(1000, "", 0.0, 0.0))
+    cl.insert(Course(1000))
     for _ in range(20):
-        cl.insert(Course(1200, "", 0.0, 0.0))
-    cl.insert(Course(1800, "", 0.0, 0.0))
+        cl.insert(Course(1200))
+    cl.insert(Course(1800))
     assert cl.size() == 22
     cl.remove_all(1200)
     assert cl.size() == 2
@@ -106,9 +112,9 @@ def test_gpa():
 
 def test_iterate_list():
     cl = CourseList()
-    cl.insert(Course(1000, "", 0.0, 0.0))
+    cl.insert(Course(1000))
     for _ in range(20):
-        cl.insert(Course(1200, "", 0.0, 0.0))
+        cl.insert(Course(1200))
     totalCourses = 0
     for _ in cl:
         totalCourses += 1

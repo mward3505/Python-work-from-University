@@ -1,5 +1,5 @@
 class CourseList:
-    """Ordered Link list of courses"""
+    "Ordered Link list of courses"
     def __init__(self):
         """Constructor for the linked list"""
         self.head = None
@@ -7,19 +7,24 @@ class CourseList:
         self.count = 0
 
     def __iter__(self):
-        """To help iterate through the list"""
-        self.current_iter = None
-        return self
-
-    def __next__(self):
-        """Helper function for __iter__"""
-        if self.current_iter is None:
-            self.current_iter = self.head
-        elif self.current_iter.next is None:
-            raise StopIteration()
-        else:
-            self.current_iter = self.current_iter.next
-        return self.current_iter
+        current = self.head
+        while current is not None:
+            yield current
+            current = current.next
+    # def __iter__(self):
+    #     """To help iterate through the list"""
+    #     self.current_iter = None
+    #     return self
+    #
+    # def __next__(self):
+    #     """Helper function for __iter__"""
+    #     if self.current_iter is None:
+    #         self.current_iter = self.head
+    #     elif self.current_iter.next is None:
+    #         raise StopIteration()
+    #     else:
+    #         self.current_iter = self.current_iter.next
+    #     return self.current_iter
 
     def insert(self, course):
         """Inserts a course sorted by the course number"""
