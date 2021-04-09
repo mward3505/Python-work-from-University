@@ -56,7 +56,7 @@ class HashMap:
         for i in range(self.inner_size):
             if self.array[i] is not None:
                 for item in self.array[i]:
-                    result += item[0]
+                    result.append(item[0])
         return result
 
     def rehash(self):
