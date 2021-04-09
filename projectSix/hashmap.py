@@ -29,13 +29,13 @@ class HashMap:
                 self.set(item[0], item[1])
         if self.array[index] is None:
             self.array[index] = []
-            self.array[index].append(key, value)
+            self.array[index].append((key, value))
         else:
             for keyValuePair in self.array[index]:
                 if keyValuePair[0] == key:
                     keyValuePair[0] = value
                     return
-            self.array[index].append(key, value)
+            self.array[index].append((key, value))
         self.count += 1
         if self.get_load_factor() >= 0.80:
             self.rehash()
@@ -44,6 +44,7 @@ class HashMap:
         pass
 
     def clear(self):
+        self.inner_size = 7
         self.array = [None] * self.inner_size
         self.count = 0
 

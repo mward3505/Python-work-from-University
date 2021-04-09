@@ -1,7 +1,7 @@
 from time import perf_counter
 
 
-def weight_on(r,c):    
+def weight_on(r, c):
     if r <= 0:
         return 0
     if c < 0 or c > r:
@@ -42,7 +42,7 @@ class HashMap:
             temp = self.array
             self.array = [None] * self.inner_size
             for item in temp:
-                self.add(item[0], item[1])
+                self.set(item[0], item[1])
         if self.array[index] is None:
             self.array[index] = []
             self.array[index].append((key, value))
@@ -94,7 +94,7 @@ class HashMap:
         return -12
     
     def get(self, key):
-        index =  hash(key) % self.inner_size
+        index = hash(key) % self.inner_size
         if self.array[index] is None:
             raise KeyError("Key not found")
         for keyValuePair in self.array[index]:
@@ -102,7 +102,7 @@ class HashMap:
                 return keyValuePair[1]
         raise KeyError("Key not found")
 
-depth = 22
+depth = 7
 
 start = perf_counter()
 myMap = HashMap()
@@ -122,7 +122,7 @@ for i in range(depth):
 end = perf_counter()
 print("Elapsed time:", end - start)
 
-depth = 22
+depth = 7
 
 start = perf_counter()
 for i in range(depth):
