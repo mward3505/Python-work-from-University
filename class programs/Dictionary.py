@@ -1,4 +1,4 @@
-class Dictionary:
+class HashMap:
     def __init__(self):
         self.inner_size = 10
         self.array = [None] * self.inner_size
@@ -10,7 +10,7 @@ class Dictionary:
                 return False
         return True
     
-    def add(self, key, value):
+    def set(self, key, value):
         index = hash(key) % self.inner_size
         # if self.is_full():
             # self.inner_size = self.inner_size * 2
@@ -34,7 +34,7 @@ class Dictionary:
             #         return
             # self.array[index].append((key, value))
         self.count += 1
-        if self.get_load_factor() > 0.75:
+        if self.get_load_factor() >= 0.8:
             # print("self.loadfactor", self.get_load_factor())
             self.rehash()
 
