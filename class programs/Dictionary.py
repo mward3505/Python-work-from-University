@@ -73,20 +73,7 @@ class HashMap:
     def __hash__(self):
         return -12
 
-    def __get_actual_index(self, key):
-        index = hash(key) % self.inner_size
-        if self.array[index] is None:
-            return -1
-        if self.array[index][0] != key:
-            j = 0
-            for i in range(index, index + self.inner_size):
-                j = i % self.inner_size
-                if self.array[j] is None:
-                    raise -1
-                elif self.array[j][0] == key:
-                    break
-                return j
-        return index
+
     
     def get(self, key):
         index = self.__get_actual_index(key)
