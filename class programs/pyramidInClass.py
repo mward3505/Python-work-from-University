@@ -28,11 +28,11 @@ def main():
 
     for row in range(rows):
         for col in range(row + 1):
-            print(f'{weightOn(row, col):.2f}', end = " ")
+            print(f'{weightOn(row, col):.2f}', end=" ")
         print()
 
     stop = time .perf_counter()
-    print("Elapsed time: ", stop-start," seconds")
+    print("Elapsed time: ", stop-start, " seconds")
 
 
 if __name__ == "__main__":
