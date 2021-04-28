@@ -208,7 +208,46 @@ class Graph:
 
 
 def main():
-    pass
+    graph = Graph()
+    graph.add_vertex("A")
+    graph.add_vertex("B")
+    graph.add_vertex("C")
+    graph.add_vertex("D")
+    graph.add_vertex("E")
+    graph.add_vertex("F")
+
+    graph.add_edge("A", "B", 2)
+    graph.add_edge("A", "F", 9)
+
+    graph.add_edge("B", "F", 6)
+    graph.add_edge("B", "D", 15)
+    graph.add_edge("B", "C", 8)
+
+    graph.add_edge("C", "D", 1)
+
+    graph.add_edge("E", "C", 7)
+    graph.add_edge("E", "D", 3)
+
+    graph.add_edge("F", "B", 6)
+    graph.add_edge("F", "E", 3)
+
+    print(graph)
+    print("starting BFS with vertex A")
+    for vertex in graph.bfs("A"):
+        print(vertex, end="")
+    print()
+    print()
+
+    print("starting BFS with vertex A")
+    for vertex in graph.dfs("A"):
+        print(vertex, end="")
+    print()
+    print()
+
+    result = graph.dsp("A", "F")
+    print(result[1])
+    print()
+    print(graph.dsp_all("A"))
 
 
 if __name__ == "__main__":
