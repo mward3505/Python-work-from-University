@@ -1,8 +1,8 @@
-import heapq
 import math
 
 
 class StorageCollection:
+    """Organize the storage to use a stack"""
     def __init__(self, is_stack):
         if not isinstance(is_stack, bool):
             raise ValueError("is_stack parameter must be true or false.")
@@ -12,26 +12,33 @@ class StorageCollection:
         self.storage = []
 
     def push(self, value):
+        """Pushes items on to the stack"""
         self.storage.append(value)
 
     def pop(self):
+        """Pops items from the stack"""
         return self.storage.pop(self.popIndex)
 
     def is_empty(self):
+        """Checks the stack for when it's empty"""
         return self.storage == []
 
 
 class Graph:
+    """Creates a graph"""
     def __init__(self):
+        """Constructs the graph properties"""
         self.__vertices = []
         self.__matrix = [[]]
 
     def __iter__(self):
+        """Creates an iterator for the vertices"""
         vertices = self.bfs(self.__vertices[0])
         for item in vertices:
             yield item
 
     def add_vertex(self, label):
+        """Adds vertex to the graph"""
         if not isinstance(label, str):
             raise ValueError
 
@@ -46,6 +53,7 @@ class Graph:
         return self
 
     def add_edge(self, src, dest, w):
+        """Adds a distance between two vertices"""
         if not isinstance(w, int) and not isinstance(w, float):
             raise ValueError
 
@@ -56,14 +64,12 @@ class Graph:
 
         return self
 
-    def add_edge2way(self, src, dest, w):
-        self.add_edge(src, dest, w)
-        self.add_edge(dest, src, w)
-
     def vertex_count(self):
+        """Counts the vertices"""
         return len(self.__vertices)
 
     def neighbors(self, vertex):
+        """Helps find the neighbors for the graph"""
         result = []
         v = self.__vertices.index(vertex)
         for i in range(self.vertex_count()):
@@ -73,6 +79,7 @@ class Graph:
         return result
 
     def get_weight(self, src, dest):
+        """Returns the weight of a path if it is found otherwise will assign infinity"""
         if src not in self.__vertices or dest not in self.__vertices:
             raise ValueError
         elif self.__matrix[self.__vertices.index(src)][self.__vertices.index(dest)] is None:
@@ -81,6 +88,7 @@ class Graph:
             return self.__matrix[self.__vertices.index(src)][self.__vertices.index(dest)]
 
     def __iterative_traversal(self, vertex, collection):
+        """helps iterate through the graph"""
         result = []
         visited = [False] * len(self.__vertices)
         vertices_count = len(self.__vertices)
@@ -100,20 +108,24 @@ class Graph:
         return result
 
     def dfs(self, root):
+        """Depth first search through the graph"""
         stack = StorageCollection(True)
         return self.__iterative_traversal(root, stack)
 
     def bfs(self, root):
+        """Breadth first search through the graph"""
         queue = StorageCollection(False)
         return self.__iterative_traversal(root, queue)
 
     def get_index(self, priority_queue, vertex_label):
+        """Returns the current index"""
         for i in range(len(priority_queue)):
             if priority_queue[i][1] == vertex_label:
                 return i
         return -1
 
     def dsp(self, src, dest):
+        """Helps find the shortest distance between the source and the destination provided"""
         priority_queue = []
         # Set all nodes as unvisited
         visited = []
@@ -170,6 +182,7 @@ class Graph:
             return resulting_length, resulting_path
 
     def dsp_all(self, src):
+        """Returns all available shortest paths for the desired source"""
         path_list = {}
 
         for vertex in self.__vertices:
@@ -179,6 +192,7 @@ class Graph:
         return path_list
 
     def __str__(self):
+        """Helps print out the graph and it's paths"""
         vertices_count = len(self.__vertices)
         result = "digraph G {\n"
         for label in self.__vertices:
